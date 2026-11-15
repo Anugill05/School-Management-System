@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { AuthCtx, useAuth } from './auth.js';
 import { NavLink, Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
-import { BarChart3, BookOpenCheck, CalendarCheck, GraduationCap, History, LayoutDashboard, LogOut, Menu, Receipt, School, ShieldCheck, Users, KeyRound } from 'lucide-react';
+import { BarChart3, BookOpenCheck, CalendarCheck, GraduationCap, History, Home, LayoutDashboard, LogOut, Menu, Receipt, School, ShieldCheck, Users, KeyRound } from 'lucide-react';
 import { api, setUnauthorizedHandler } from './api.js';
 import { Button, Modal, TextField, FormError, useForm, useToast } from './ui.jsx';
 import Login from './pages/Login.jsx';
@@ -58,6 +58,7 @@ function Shell({ user, onLogout }) {
         <div className="brand"><div className="logo"><GraduationCap size={20} /></div>Greenfield School</div>
         <nav className="nav">
           {items.map(([to, text, Icon, , end]) => <NavLink key={to} to={to} end={end}><Icon size={18} />{label[to] ?? text}</NavLink>)}
+          <NavLink to="/home"><Home size={18} />Home page</NavLink>
         </nav>
         <div className="spacer" />
         <div className="userbox">
@@ -117,5 +118,12 @@ export default function App() {
 
   if (user === undefined) return <div style={{ display: 'grid', placeItems: 'center', height: '100%' }}><div className="skel" style={{ width: 160 }} /></div>;
   if (!user) return <Routes><Route path="/login" element={<Login onLogin={setUser} />} /><Route path="*" element={<Landing />} /></Routes>;
-  return <AuthCtx.Provider value={{ user }}><Shell user={user} onLogout={logout} /></AuthCtx.Provider>;
+  return (
+  <AuthCtx.Provider value={{ user }}>
+    <Routes>
+      <Route path="/home" element={<Landing />} />
+      <Route path="*" element={<Shell user={user} onLogout={logout} />} />
+    </Routes>
+  </AuthCtx.Provider>
+);
 }

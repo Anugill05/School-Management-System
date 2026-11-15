@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { BarChart3, BookOpenCheck, CalendarCheck, Check, FileClock, GraduationCap, LockKeyhole, Receipt, ShieldCheck, Users } from 'lucide-react';
 import { useReveal } from '../ui.jsx';
+import { useAuth } from '../auth.js';
 import campus from '../assets/campus.jpg';
 import classroom from '../assets/classroom.jpg';
 import school from '../assets/school.jpg';
@@ -24,13 +25,16 @@ const ROLES = [
 
 export default function Landing() {
   useReveal();
+  const signedIn = Boolean(useAuth()?.user);
+  const homePath = signedIn ? '/home' : '/';
+  const appLink = signedIn ? '/' : '/login';
   return (
     <div className="lp">
       <header className="lp-nav">
         <div className="lp-wrap">
-          <Link to="/" className="lp-brand"><span className="logo"><GraduationCap size={19} /></span>Greenfield School</Link>
+          <Link to={homePath} className="lp-brand"><span className="logo"><GraduationCap size={19} /></span>Greenfield School</Link>
           <nav className="lp-links" aria-label="Sections"><a href="#features">Features</a><a href="#roles">Who it's for</a><a href="#security">Security</a></nav>
-          <Link className="btn primary" to="/login">Sign in</Link>
+          <Link className="btn primary" to={appLink}>{signedIn ? 'Go to dashboard' : 'Sign in'}</Link>
         </div>
       </header>
 
@@ -41,7 +45,7 @@ export default function Landing() {
             <h1>School administration in one place.</h1>
             <p className="lead">Attendance, exams, report cards and fees for administrators, teachers and guardians. Everyone sees only what they need.</p>
             <div className="lp-cta">
-              <Link className="btn light lg" to="/login">Open the demo</Link>
+              <Link className="btn light lg" to={appLink}>{signedIn ? 'Go to dashboard' : 'Open the demo'}</Link>
               <a className="btn outline-light lg" href="#features">See features</a>
             </div>
           </div>
@@ -90,7 +94,7 @@ export default function Landing() {
         <div className="lp-wrap reveal">
           <h2>Try it with a full school of sample data</h2>
           <p>Sign in as an administrator, teacher or guardian. Everything in the demo is synthetic, so explore freely.</p>
-          <Link className="btn light lg" to="/login">Open the demo</Link>
+          <Link className="btn light lg" to={appLink}>{signedIn ? 'Go to dashboard' : 'Open the demo'}</Link>
         </div>
       </section>
 
