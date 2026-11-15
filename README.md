@@ -4,12 +4,12 @@
 
 | | |
 |---|---|
-| **Candidate** | `<YOUR FULL NAME>` |
-| **Registration no.** | `<YOUR REGISTRATION NUMBER>` |
+| **Candidate** | `Anu` |
+| **Registration no.** | `12317949` |
 | **Live demo** | https://school-management-system-backend-nixj.onrender.com |
 | **API docs (Swagger UI)** | https://school-management-system-backend-nixj.onrender.com/api/docs |
 | **Walkthrough video** | `<VIDEO LINK>` |
-| **Repository / branch** | `<REPO URL>` · `main` |
+| **Repository / branch** | `https://github.com/Anugill05/School-Management-System` · `main` |
 
 A full-stack, database-backed school management application: academic administration, attendance, examinations and report cards, fee invoicing with a reconciling ledger, role-based access (admin / teacher / guardian), reports and an audit trail. **All data is synthetic.** Payments are **simulated only**; no real payment data or credentials are used anywhere.
 
